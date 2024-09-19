@@ -1,0 +1,133 @@
+openapi: 3.0.0
+info:
+  title: Programme Management API
+  description: A RESTful API for managing Programme development and review workflow at Namibia University of Science and Technology.
+  version: 1.0.0
+  
+paths:
+  /programmes:
+    post:
+      summary: Add a new programme
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Programme'
+      responses:
+        '201':
+          description: Programme created
+    get:
+      summary: Retrieve all programmes
+      responses:
+        '200':
+          description: List of programmes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Programme'
+  
+  /programmes/{code}:
+    get:
+      summary: Retrieve details of a programme
+      parameters:
+        - name: programmeCode
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Programme details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Programme'
+    put:
+      summary: Update a programme's details
+      parameters:
+        - name: programmeCode
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Programme'
+      responses:
+        '200':
+          description: Programme updated
+    delete:
+      summary: Delete a programme by code
+      parameters:
+        - name: programmeCode
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Programme deleted
+
+  /programmes/review:
+    get:
+      summary: Retrieve all programmes due for review
+      responses:
+        '200':
+          description: List of programmes due for review
+
+  /programmes/faculty/{facultyName}:
+    get:
+      summary: Retrieve all programmes in a faculty
+      parameters:
+        - name: facultyName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of programmes in the faculty
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Programme'
+
+components:
+  schemas:
+    Programme:
+      type: object
+      properties:
+        programmeCode:
+          type: string
+        nqfLevel:
+          type: integer
+        faculty:
+          type: string
+        department:
+          type: string
+        title:
+          type: string
+        registrationDate:
+          type: string
+          format: date
+        courses:
+          type: array
+          items:
+            $ref: '#/components/schemas/Course'
+    Course:
+      type: object
+      properties:
+        courseCode:
+          type: string
+        courseName:
+          type: string
+        nqfLevel:
+          type: integer
