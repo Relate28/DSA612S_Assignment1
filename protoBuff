@@ -1,0 +1,67 @@
+syntax = "proto3";
+package shopping;
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/empty.proto";
+
+service onlineShopping {
+    rpc addProduct (Product) returns (ProductMessage);
+    rpc updateProduct (Product) returns (ProductMessage);
+    rpc removeProduct (google.protobuf.StringValue) returns (ProductMessage);
+    rpc listAvailableProducts (google.protobuf.Empty) returns (ListResponse);
+    rpc searchProduct (google.protobuf.StringValue) returns (ProductMessage);
+    rpc addToCart (Cart) returns (CartMessage);
+    rpc placeOrder (placeOrderRequest) returns (OrderMessage);
+    rpc createUsers (stream User) returns (UserCreationMessage);
+    rpc getUser (google.protobuf.StringValue) returns (User);
+    rpc deleteUsers (google.protobuf.StringValue) returns (UserResponse);
+}
+
+message Product {
+    string name = 1;
+    string description = 2;
+    double price = 3;
+    int32 stock_quantity = 4;
+    string sku = 5;
+    string status = 6;
+}
+
+message ProductMessage {
+    string message = 1;
+    Product product = 2;
+}
+
+message Cart {
+    string user_id = 1;
+    string sku = 2;
+}
+
+message CartMessage {
+    string user_id = 1;
+    string message = 2;
+}
+
+message placeOrderRequest {
+    string user_id = 1;
+}
+
+message OrderMessage {
+    string user_id = 1;
+    string message = 2;
+}
+
+message User {
+    string id = 1;
+    string name = 2;
+    string role = 3;
+}
+
+message UserCreationMessage {
+    repeated User users = 1;
+}
+message UserResponse {
+    string response = 1;
+}
+
+message ListResponse{
+    repeated Product products = 1;
+}
