@@ -1,0 +1,206 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Programme API",
+    "description": "API for managing Programmes",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/Programme": {
+      "get": {
+        "summary": "Get all Programme",
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Programme added successfully"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Add a new Programme",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Programme"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Programme added successfully"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "All required fields must be provided"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Programme/{staffNumber}": {
+      "get": {
+        "summary": "Get Programme by staff number",
+        "parameters": [
+          {
+            "name": "staffNumber",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Programme"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Programme not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Programme not found"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a Programme",
+        "parameters": [
+          {
+            "name": "staffNumber",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Programme"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Programme updated successfully"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Programme not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Programme not found"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a Programme",
+        "parameters": [
+          {
+            "name": "staffNumber",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "example": {
+                  "message": "Programme deleted successfully"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Programme not found",
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": "Programme not found"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Programme": {
+        "type": "object",
+        "properties": {
+          "staffNumber": {
+            "type": "string"
+          },
+          "officeNumber": {
+            "type": "string"
+          },
+          "staffName": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "courses": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
