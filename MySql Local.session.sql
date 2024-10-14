@@ -17,15 +17,20 @@ CREATE TABLE Courses (
 
 
 INSERT INTO Programmes (programmeCode, title, nQFLevel, faculty, department, registrationDate)
-VALUES ('07BCCS', 'Bachelor of Computer Science(Cyber Security)', 7, 'Faculty of Computing and Informatics', 'Department of Computer Science', '2023-02-22'),
-       ('09MMET', 'Master of Engineering in Metallurgy', 9, 'Faculty of Engineering and the Built Environment', 'Department of Civil, Mining and Process Engineering
-', '2023-02-25');
+VALUES('09MMET', 'Master of Engineering in Metallurgy', 9, 'Faculty of Engineering and the Built Environment', 'Department of Civil, Mining and Process Engineering', '2023-02-25');
 
-INSERT INTO Courses (courseCode, courseName, nQFLevel, programmeCode)
-VALUES ('CSC101', 'Introduction to Programming', 7, '07BCCS');
+INSERT INTO Courses (courseCode, courseName, nQFLevel, programmeCode) 
+VALUES ('CSC101', 'Introduction to Programming', 7, '07BMCS'),
+       ('ESS502S', 'Engineering Skills and Safety', 7, '04SMET');
 
+
+DELETE FROM courses 
+WHERE courseCode = 'CS101';
 
 SELECT * FROM programmes;
+
+SELECT * FROM courses;
+
 
 
 

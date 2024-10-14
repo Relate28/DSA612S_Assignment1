@@ -1,8 +1,10 @@
 [package]
-org = "narib"
-name = "covid19"
+org = "dette"
+name = "programme_management"
 version = "0.1.0"
-distribution = "2201.7.2"
+distribution = "2201.9.3"
 
 [build-options]
 observabilityIncluded = true
+
+
